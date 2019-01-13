@@ -7,10 +7,17 @@ signupForm.addEventListener('submit', (e) => {
 
     auth.createUserWithEmailAndPassword(email, password)
         .then(response => {
-            console.log(response)
-
             const modal = document.querySelector('#modal-signup')
             M.Modal.getInstance(modal).close()
             signupForm.reset()
+        })
+})
+
+const logout = document.querySelector('#logout')
+logout.addEventListener('click', (e) => {
+    e.preventDefault()
+    auth.signOut()
+        .then(() => {
+            console.log("User's logged out")
         })
 })
