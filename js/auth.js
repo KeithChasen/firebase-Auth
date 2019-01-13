@@ -1,3 +1,8 @@
+//get data
+db.collection('posts').get().then(response => {
+    setupGuides(response.docs)
+})
+
 //listen for auth status changes
 auth.onAuthStateChanged(user => {
     if (user) {
