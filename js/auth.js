@@ -4,8 +4,10 @@ auth.onAuthStateChanged(user => {
         //get data
         db.collection('posts').get().then(response => {
             setupGuides(response.docs)
+            setupUI(user)
         })
     } else {
+        setupUI()
         setupGuides([])
     }
 })
