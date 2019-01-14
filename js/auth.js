@@ -21,6 +21,10 @@ createForm.addEventListener('submit', (e) => {
         title: createForm.title.value,
         content: createForm.content.value,
     }).then(() => {
+
+    }).catch(error => {
+        console.log(error.message)
+    }).finally(() => {
         const modal = document.querySelector('#modal-create')
         M.Modal.getInstance(modal).close()
         createForm.reset()
