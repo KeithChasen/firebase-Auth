@@ -2,7 +2,7 @@
 auth.onAuthStateChanged(user => {
     if (user) {
         //get data
-        db.collection('posts').get().then(response => {
+        db.collection('posts').onSnapshot(response => {
             setupGuides(response.docs)
             setupUI(user)
         })
