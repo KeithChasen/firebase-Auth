@@ -1,12 +1,15 @@
 const postList = document.querySelector('.posts')
 const loggedOutLinks = document.querySelectorAll('.logged-out')
 const loggedInLinks = document.querySelectorAll('.logged-in')
+const accountDetails = document.querySelector('.account-details')
 
 const setupUI = user => {
     if (user) {
+        accountDetails.innerHTML = `<div>Logged in as ${user.email}</div>`
         loggedInLinks.forEach(item => item.style.display = 'block')
         loggedOutLinks.forEach(item => item.style.display = 'none')
     } else {
+        accountDetails.innerHTML = ''
         loggedOutLinks.forEach(item => item.style.display = 'block')
         loggedInLinks.forEach(item => item.style.display = 'none')
     }

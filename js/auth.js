@@ -5,6 +5,8 @@ auth.onAuthStateChanged(user => {
         db.collection('posts').onSnapshot(response => {
             setupGuides(response.docs)
             setupUI(user)
+        }).catch(error => {
+            console.log(error)
         })
     } else {
         setupUI()
