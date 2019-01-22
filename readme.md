@@ -13,3 +13,9 @@ npm install firebase-tools -g
 ```
 firebase init functions
 ``` 
+
+### To deploy functions  
+
+```
+firebase deploy --only functions
+``` 
