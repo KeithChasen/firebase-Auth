@@ -2,16 +2,24 @@ const postList = document.querySelector('.posts')
 const loggedOutLinks = document.querySelectorAll('.logged-out')
 const loggedInLinks = document.querySelectorAll('.logged-in')
 const accountDetails = document.querySelector('.account-details')
+const adminItems = document.querySelectorAll('.admin')
 
 const setupUI = user => {
     if (user) {
+        if (user.admin) {
+            adminItems.forEach(item => item.style.display = 'block')
+        }
+
         db.collection('users').doc(user.uid).get().then(doc => {
             accountDetails.innerHTML = `<div>Logged in as ${user.email}</div>
-                                        <div>${doc.data().bio}</div>`
-            loggedInLinks.forEach(item => item.style.display = 'block')
-            loggedOutLinks.forEach(item => item.style.display = 'none')
+                                        <div>${doc.data().bio}</div>
+                                        <div class="pink-text">${user.admin ? 'Admin' : ''}</div>`
         })
+
+        loggedInLinks.forEach(item => item.style.display = 'block')
+        loggedOutLinks.forEach(item => item.style.display = 'none')
     } else {
+        adminItems.forEach(item => item.style.display = 'none')
         accountDetails.innerHTML = ''
         loggedOutLinks.forEach(item => item.style.display = 'block')
         loggedInLinks.forEach(item => item.style.display = 'none')
