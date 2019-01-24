@@ -53,18 +53,19 @@ signupForm.addEventListener('submit', (e) => {
     const email = signupForm['signup-email'].value
     const password = signupForm['signup-password'].value
 
-    auth.createUserWithEmailAndPassword(email, password)
-        .then(response => {
+    auth.createUserWithEmailAndPassword(email, password).then(response => {
 
             return db.collection('users').doc(response.user.uid).set({
                 bio: signupForm['signup-bio'].value
             })
 
         }).then(() => {
-
-        const modal = document.querySelector('#modal-signup')
-        M.Modal.getInstance(modal).close()
-        signupForm.reset()
+            const modal = document.querySelector('#modal-signup')
+            M.Modal.getInstance(modal).close()
+            signupForm.reset()
+            signupForm.querySelector('.error').innerHTML = ''
+        }).catch(err => {
+            signupForm.querySelector('.error').innerHTML = err.message
     })
 })
 
@@ -86,5 +87,8 @@ loginForm.addEventListener('submit', (e) => {
             const modal = document.querySelector('#modal-login')
             M.Modal.getInstance(modal).close()
             loginForm.reset()
-        })
+            loginForm.querySelector('.error').innerHTML = ''
+        }).catch(err => {
+            loginForm.querySelector('.error').innerHTML = err.message
+    })
 })
